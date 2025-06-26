@@ -1,0 +1,7 @@
+Notes
+
+
+Auto blooger tept.py
+Main. Py 
+Article. Py 
+True / false
