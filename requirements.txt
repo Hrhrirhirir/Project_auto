@@ -1,0 +1,12 @@
+requests
+oauth2client
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+pytrends
+schedule
+tqdm
+python-dotenv
+beautifulsoup4
+google-generativeai
