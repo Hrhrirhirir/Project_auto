@@ -28,7 +28,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           BLOG_ID: ${{ secrets.BLOG_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python article.py
+        run: python topic.py
 
       - name: 💾 Commit updated posted_articles.json
         run: |
