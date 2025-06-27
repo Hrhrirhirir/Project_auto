@@ -1,0 +1,41 @@
+name: ✍️ Auto Post Articles Every 30 Minutes
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # ⏰ تشغيل كل 30 دقيقة
+  workflow_dispatch:         # ✅ إمكانية التشغيل اليدوي
+
+jobs:
+  post_articles:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ✅ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: 📝 Run Article Posting Script
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          BLOG_ID: ${{ secrets.BLOG_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python main.py
+
+      - name: 💾 Commit updated posted_articles.json
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add posted_articles.json
+          git commit -m "🔄 Update posted_articles.json"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
